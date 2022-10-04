@@ -17,9 +17,9 @@ namespace _4_1_06
         {
             int[,] array = new int[,]
             {
-                { 8, 0, 6, -4, 0 },
-                { 4, 1, 6, 7, 8 },
-                { 7, 8, 8, 8, 2 },
+                { 8, 0, 6, 6, 0 },
+                { 4, 1, 7, 7, 7 },
+                { 7, 8, 8, 5, 5 },
                 { 12, 0, 3, -4, 5 },
             };
 
@@ -45,12 +45,11 @@ namespace _4_1_06
                 int maxAmount = 0;
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    int amount = 0;
-                    int temp = array[i,j];
-                    for (int k = 0; k < array.GetLength(1); k++)
+                    int amount = 0;                    
+                    for (int k = 0; k < (array.GetLength(1)-1); k++)
                     {
-                        if (array[i,k] == temp)
-                            amount++;
+                        if (array[i, k] == array[i, k + 1])
+                            amount++;                                                
                     }
                     if (amount > maxAmount)
                         maxAmount = amount;
