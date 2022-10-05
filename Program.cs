@@ -18,8 +18,8 @@ namespace _4_1_06
             int[,] array = new int[,]
             {
                 { 8, 0, 6, 6, 0 },
-                { 4, 1, 7, 7, 7 },
-                { 7, 8, 8, 5, 5 },
+                { 7, 7, 7, 7, 7 },
+                { 8, 8, 4, 5, 5 },
                 { 12, 0, 3, -4, 5 },
             };
 
@@ -38,31 +38,44 @@ namespace _4_1_06
             }
             Console.WriteLine($"count = {count}");
 
-            // Номер строки, в которой находится самая длинная серия одинаковых элементов.
-            List<int> maxAmounts = new List<int>();
+            // Подсчет количества одинаковых элементов.
+            List<int> amounts = new List<int>();
             for (int i = 0; i < array.GetLength(0); i++)
             {
-                int maxAmount = 0;
-                for (int j = 0; j < array.GetLength(1); j++)
+                int amount = 1;                
+                for (int j = 0; j < array.GetLength(1) - 1; j++)
                 {
-                    int amount = 0;                    
-                    for (int k = 0; k < (array.GetLength(1)-1); k++)
+                    if (array[i, j] == array[i, j + 1])
                     {
-                        if (array[i, k] == array[i, k + 1])
-                            amount++;                                                
+                        amount++;
                     }
-                    if (amount > maxAmount)
-                        maxAmount = amount;
                 }
-                maxAmounts.Add(maxAmount);
+                amounts.Add(amount);
             }
+            foreach (int amount in amounts)
+                Console.WriteLine(amount);
+
+            // Номер строки, в которой находится самая длинная серия одинаковых элементов.
             int number = 0;
-            for (int i = 0; i < maxAmounts.Count; i++)
+            for (int i = 0; i < amounts.Count; i++)
             {
-                if (maxAmounts[i] > number)
+                if (amounts[i] > number)
                     number = i;
             }
             Console.WriteLine($"number = {number}");
+
+            // Вывод в консоль начального массива.
+            Console.WriteLine($"Исходный массив: ");
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    Console.Write($" {array[i, j]}, ");
+                }
+                Console.WriteLine();
+            }
+
+
             Console.ReadKey();
         }
     }
